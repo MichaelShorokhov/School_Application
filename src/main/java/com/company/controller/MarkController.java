@@ -62,9 +62,9 @@ import java.util.List;
         return mark;
     }
 
-    @DeleteMapping(value = "/remove")
-    public void removeMark(@RequestBody Mark mark){
-        service.removeMark(mark.getId());
+    @DeleteMapping(value = "/remove/{id}")
+    public void removeMark(@PathVariable String id){
+        service.removeMark(Long.parseLong(id));
     }
 
     @PostMapping(value = "/update")
