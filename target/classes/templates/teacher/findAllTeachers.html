@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>List of Teachers</h1>
+    <tr th:each="teacher : ${teachers}">
+        <td th:text="'Id: ' + ${teacher.id}"></td>
+        <td th:text="'Name: ' + ${teacher.name}"></td>
+        <td th:text="'Surname: ' + ${teacher.surname}"></td>
+        <td th:text="'Age: ' + ${teacher.age}"></td>
+        <td th:text="'Phone Number: ' + ${teacher.phoneNumber}"></td>
+        </br>
+    </tr>
+    <form action="#" th:action="@{/teacher/}" method="get">
+        <p><input type="submit" value="Home"></p>
+    </form>
+</body>
+</html>

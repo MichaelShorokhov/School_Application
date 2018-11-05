@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Add new Mark</h1>
+    <form action="#" th:action="@{/markForLesson/find}" th:object="${markForLesson}"  method="post">
+            <select th:field="*{mark}">
+            <option th:value="0" th:text="'No Value'"></option>
+                 <option th:each="mark : ${marks}"
+                   th:value="${mark.id}"
+                   th:text="${mark.value}">
+                 </option>
+            </select>
+            <select th:field="*{lesson}">
+            <option th:value="0" th:text="'No Value'"></option>
+                 <option th:each="lesson : ${lessons}"
+                   th:value="${lesson.id}"
+                   th:text="'Date: ' + ${lesson.date} + ' Group Name: ' + ${lesson.group.name} + ' Subject: ' + ${lesson.subject.name}">
+                 </option>
+            </select>
+            <select th:field="*{student}">
+                <option th:value="0" th:text="'No Value'"></option>
+                 <option th:each="student : ${students}"
+                   th:value="${student.id}"
+                   th:text="'Name: ' + ${student.name} + ' Surname: ' + ${student.surname} + ' Age: ' + ${student.age} + ' Phone Number: ' + ${student.phoneNumber}">
+                 </option>
+            </select>
+
+        <tr th:each="markForLesson : ${markForLessons}">
+            <p th:text="'Id: ' + ${markForLesson.id}"></p>
+            <p th:text="'Mark: ' + ${markForLesson.mark.value}"></p>
+            <p th:text="'Student: ' + 'Name: ' + ${markForLesson.student.name} + ' Surname: ' + ${markForLesson.student.surname} + ' Age: ' + ${markForLesson.student.age} + ' Phone Number: ' + ${markForLesson.student.phoneNumber}"></p>
+            <p th:text="'Lesson: ' + 'Subject: ' + ${markForLesson.lesson.subject.name} + ' Teacher: ' + ${markForLesson.lesson.teacher.surname} + ' Date: ' + ${markForLesson.lesson.date}"></p>
+        </br>
+        </tr>
+            <p><input type="submit" value="submit"></p>
+        </form>
+
+    <form action="#" th:action="@{/markForLesson}" method="get">
+            <p><input type="submit" value="Home"></p>
+    </form>
+</body>
+</html>

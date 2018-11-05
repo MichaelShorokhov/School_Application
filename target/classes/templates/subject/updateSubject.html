@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Update Subject</h1>
+    <form action="#" th:action="@{/subject/update}" th:object="${subject}" method="post">
+            <div>
+                <select th:field="${subject.id}">
+                    <option th:each="subject : ${subjects}"
+                    th:value="${subject.id}"
+                    th:text="${subject.name}">
+                    </option>
+                </select>
+            </div>
+        <p>New Name: <input type="text" th:field="*{name}"></p>
+        <p><input type="submit" value="submit"></p>
+    </form>
+    <form action="#" th:action="@{/subject/}" method="get">
+            <p><input type="submit" value="Home"></p>
+    </form>
+</body>
+</html>

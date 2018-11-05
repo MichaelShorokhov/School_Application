@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Add new Group</h1>
+    <form action="#" th:action="@{/group/add}" th:object="${group}"  method="post">
+            <select th:field="*{course.id}">
+                 <option th:each="course : ${courses}"
+                   th:value="${course.id}"
+                   th:text="${course.year}">
+                 </option>
+            </select>
+            <p>Name: <input type="text" th:field="*{name}"></p>
+            <p><input type="submit" value="submit"></p>
+        </form>
+
+    <form action="#" th:action="@{/group/}" method="get">
+            <p><input type="submit" value="Home"></p>
+    </form>
+</body>
+</html>

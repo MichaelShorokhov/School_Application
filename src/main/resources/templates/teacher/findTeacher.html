@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <form action="#" th:action="@{/teacher/find}" th:object="${teacher}" method="post">
+        <p>Name: <input type="text" th:field="*{name}"></p>
+        <p>Surname: <input type="text" th:field="*{surname}"></p>
+        <p>Age: <input type="text" th:field="*{age}"></p>
+        <p>Phone Number: <input type="text" th:field="*{phoneNumber}"></p>
+        <tr th:each="teacher : ${teachers}">
+                <td th:text="'Id: ' + ${teacher.id}"></td>
+                <td th:text="'Name: ' + ${teacher.name}"></td>
+                <td th:text="'Surname: ' + ${teacher.surname}"></td>
+                <td th:text="'Age: ' + ${teacher.age}"></td>
+                <td th:text="'Phone Number: ' + ${teacher.phoneNumber}"></td>
+                </br>
+            </tr>
+        <p><input type="submit" value="submit"></p>
+    </form>
+    <form action="#" th:action="@{/teacher/}" method="get">
+
+        <p><input type="submit" value="Home"></p>
+    </form>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Update Term</h1>
+    <form action="#" th:action="@{/term/update}" th:object="${term}" method="post">
+        <div>
+            <select th:field="${term.id}">
+                 <option th:each="term : ${terms}"
+                   th:value="${term.id}"
+                   th:text="${term.name}">
+                 </option>
+            </select>
+        </div>
+        <p>New Year: <input type="text" th:field="*{name}"></p>
+        <p>Start Date: <input type="date" th:field="*{startDate}"></p>
+        <p>End Date: <input type="date" th:field="*{endDate}"></p>
+        <p><input type="submit" value="submit"></p>
+    </form>
+    <form action="#" th:action="@{/term/}" method="get">
+            <p><input type="submit" value="Home"></p>
+    </form>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Choose the action</h1>
+    <form action="#" th:action="@{/teacher/find}" method="get">
+        <p><input type="submit" value="Find"></p>
+    </form>
+    <form action="#" th:action="@{/teacher/findAll}" method="get">
+            <p><input type="submit" value="FindAll"></p>
+    </form>
+    <form action="#" th:action="@{/teacher/add}" method="get">
+            <p><input type="submit" value="Add"></p>
+    </form>
+    <form action="#" th:action="@{/teacher/remove}" method="get">
+            <p><input type="submit" value="Remove"></p>
+    </form>
+    <form action="#" th:action="@{/teacher/update}" method="get">
+            <p><input type="submit" value="Update"></p>
+    </form>
+        <form action="#" th:action="@{/teacher/addGroup}" method="get">
+                <p><input type="submit" value="Add Group"></p>
+        </form>
+        <form action="#" th:action="@{/teacher/removeGroup}" method="get">
+                <p><input type="submit" value="Remove Group"></p>
+        </form>
+        <form action="#" th:action="@{/teacher/addSubject}" method="get">
+                <p><input type="submit" value="Add Subject"></p>
+        </form>
+        <form action="#" th:action="@{/teacher/removeSubject}" method="get">
+                <p><input type="submit" value="Remove Subject"></p>
+        </form>
+        <form action="#" th:action="@{/teacher/findGroups}" method="get">
+                    <p><input type="submit" value="Find Groups"></p>
+            </form>
+        <form action="#" th:action="@{/teacher/findSubjects}" method="get">
+                    <p><input type="submit" value="Find Subjects"></p>
+            </form>
+    <form action="#" th:action="@{/}" method="get">
+                <p><input type="submit" value="Home"></p>
+        </form>
+
+</body>
+</html>

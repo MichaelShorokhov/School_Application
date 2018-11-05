@@ -1,0 +1,3 @@
+com\company\service\MarkService.class
+com\company\controller\MarkController.class
+com\company\repository\MarkRepository.class
