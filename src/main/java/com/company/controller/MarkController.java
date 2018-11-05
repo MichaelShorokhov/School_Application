@@ -19,41 +19,10 @@ import java.util.List;
     @Autowired
     MarkService service;
 
-    @GetMapping (value = "")
-    public String startPage(Model model){
-        model.addAttribute("mark", new Mark());
-        return "mark/markHomePage";
-    }
-
-    @GetMapping(value = "/find")
-    public String findMarkForm(@ModelAttribute Mark mark, Model model) {
-        model.addAttribute("marks", service.findAll());
-        return "mark/findMark";
-    }
-
-    @PostMapping(value = "/find")
-    public String findMark(Model model,@ModelAttribute Mark mark){
-        model.addAttribute("mark", service.findMarkById(mark.getId()));
-        return "mark/findMark";
-    }
-
-//    @GetMapping(value = "/findAll")
-//    public String findAllMarks(Model model){
-//        List<Mark> marks = service.findAll();
-//        model.addAttribute("marks", marks);
-//        return "mark/findAllMarks";
-//    }
     @GetMapping(value = "/findAll")
     public List<Mark> findAllMarks(){
         List<Mark> marks = service.findAll();
         return marks;
-    }
-
-
-    @GetMapping(value = "/add")
-    public String addMarkForm(Model model){
-        model.addAttribute("mark", new Mark());
-        return "mark/addMark";
     }
 
     @PostMapping(value = "/add")
