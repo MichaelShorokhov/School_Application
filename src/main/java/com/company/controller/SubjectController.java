@@ -5,81 +5,38 @@ import com.company.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+@RestController
+@CrossOrigin
 @RequestMapping(value = "/subject")
 public class SubjectController {
     @Autowired
     SubjectService service;
 
-    @GetMapping (value = "")
-    public String startPage(Model model){
-        model.addAttribute("subject", new Subject());
-        return "subject/subjectHomePage";
-    }
-
-    @GetMapping(value = "/find")
-    public String findSubjectForm(@ModelAttribute Subject subject, Model model) {
-        model.addAttribute("subjects", service.findAll());
-        return "subject/findSubject";
-    }
-
-    @PostMapping(value = "/find")
-    public String findSubject(Model model,@ModelAttribute Subject subject){
-        model.addAttribute("subject", service.findSubjectById(subject.getId()));
-        return "subject/findSubject";
-    }
-
     @GetMapping(value = "/findAll")
-    public String findAllSubjects(Model model){
+    public List<Subject> findAllSubjects(){
         List<Subject> subjects = service.findAll();
-        model.addAttribute("subjects", subjects);
-        return "subject/findAllSubjects";
-    }
-
-
-    @GetMapping(value = "/add")
-    public String addSubjectForm(Model model){
-        model.addAttribute("subject", new Subject());
-        return "subject/addSubject";
+        return subjects;
     }
 
     @PostMapping(value = "/add")
-    public String addSubject(@Valid @ModelAttribute Subject subject){
+    public Subject addSubject(@Valid @RequestBody Subject subject){
         service.addSubject(subject);
-        return "redirect:/subject";
+        return subject;
     }
 
-    @GetMapping(value = "/remove")
-    public String removeSubjectForm(Model model){
-        model.addAttribute("subject", new Subject());
-        model.addAttribute("subjects", service.findAll());
-        return "subject/removeSubject";
-    }
-
-    @PostMapping(value = "/remove")
-    public String removeSubject(@ModelAttribute Subject subject){
-        service.removeSubject(subject.getId());
-        return "redirect:/subject";
-    }
-
-    @GetMapping(value = "/update")
-    public String updateSubjectForm(Model model){
-        model.addAttribute("subject", new Subject());
-        model.addAttribute("subjects", service.findAll());
-        return "subject/updateSubject";
+    @DeleteMapping(value = "/remove/{id}")
+    public void removeSubject(@PathVariable String id){
+        service.removeSubject(Long.parseLong(id));
     }
 
     @PostMapping(value = "/update")
-    public String updateSubject(@Valid @ModelAttribute Subject subject){
+    public Subject updateSubject(@Valid @RequestBody Subject subject){
         service.updateSubject(subject);
-        return "redirect:/subject";
+        return subject;
     }
 }

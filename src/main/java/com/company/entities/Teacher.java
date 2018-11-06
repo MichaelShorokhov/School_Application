@@ -1,5 +1,7 @@
 package com.company.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -15,20 +17,22 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teacher_seq")
     @SequenceGenerator(name = "teacher_seq", sequenceName = "teacher_id_seq", allocationSize = 1)
     private long id;
-    @NotEmpty
+//    @NotEmpty
     private String name;
-    @NotEmpty
+//    @NotEmpty
     private String surname;
-    @NotNull
+//    @NotNull
     @Max(100)
     private int age;
-    @NotEmpty
-    @Pattern(regexp = "(^$[0-9]{10})")
+//    @NotEmpty
+//    @Pattern(regexp = "(^$[0-9]{10})")
     private String phoneNumber;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "teachers", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Subject> subjects = new ArrayList<>();
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "teachers", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<StudyGroup> groups = new ArrayList<>();
 
@@ -46,13 +50,6 @@ public class Teacher {
 
     public void setGroups(List<StudyGroup> groups) {
         this.groups = groups;
-    }
-
-    public Teacher(String name, String surname, int age, String phoneNumber) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-        this.phoneNumber = phoneNumber;
     }
 
     public Teacher() {
@@ -99,23 +96,23 @@ public class Teacher {
         this.id = id;
     }
 
-    public void addStudyGroup(StudyGroup group){
-        group.addTeacher(this);
-        getGroups().add(group);
-    }
-
-    public void removeGroup(StudyGroup group){
-        group.removeTeacher(this);
-        getGroups().remove(group);
-    }
-
-    public void addSubject(Subject subject){
-        subject.getTeachers().add(this);
-        getSubjects().add(subject);
-    }
-
-    public void removeSubject(Subject subject){
-        subject.getTeachers().remove(this);
-        getSubjects().remove(subject);
-    }
+//    public void addStudyGroup(StudyGroup group){
+//        group.addTeacher(this);
+//        getGroups().add(group);
+//    }
+//
+//    public void removeGroup(StudyGroup group){
+//        group.removeTeacher(this);
+//        getGroups().remove(group);
+//    }
+//
+//    public void addSubject(Subject subject){
+//        subject.getTeachers().add(this);
+//        getSubjects().add(subject);
+//    }
+//
+//    public void removeSubject(Subject subject){
+//        subject.getTeachers().remove(this);
+//        getSubjects().remove(subject);
+//    }
 }

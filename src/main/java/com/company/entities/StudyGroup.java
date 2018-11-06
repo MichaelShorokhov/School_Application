@@ -1,6 +1,8 @@
 package com.company.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
@@ -26,6 +28,7 @@ public class StudyGroup {
     @NotNull
     private Course course;
 
+    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="teacher_group",
                 joinColumns = @JoinColumn(name="group_id"),

@@ -1,5 +1,7 @@
 package com.company.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
@@ -24,11 +26,10 @@ public class Student {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name="group_id")
-    @NotNull
     private StudyGroup group;
 
     @ManyToMany(mappedBy = "students", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @NotNull
+    @JsonManagedReference
     private List<Subject> subjects = new ArrayList<>();
 
     public long getId() {
