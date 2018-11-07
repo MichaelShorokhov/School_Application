@@ -2,7 +2,9 @@ package com.company.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
@@ -23,17 +25,16 @@ public class StudyGroup {
     @NotEmpty
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name="course_id")
     @NotNull
     private Course course;
 
-    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="teacher_group",
                 joinColumns = @JoinColumn(name="group_id"),
                 inverseJoinColumns = @JoinColumn(name="teacher_id"))
-    @NotNull
+    @JsonIgnore
     private List<Teacher> teachers = new ArrayList<>();
 
     public long getId() {

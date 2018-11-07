@@ -9,6 +9,7 @@ import com.company.service.StudyGroupService;
 import com.company.service.SubjectService;
 import com.company.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +24,6 @@ import java.util.List;
 public class TeacherController {
     @Autowired
     TeacherService teacherService;
-    @Autowired
-    StudyGroupService groupService;
-    @Autowired
-    SubjectService subjectService;
 
     @GetMapping(value = "/findAll")
     public List<Teacher> findAllTeachers(){
@@ -34,34 +31,35 @@ public class TeacherController {
         return teachers;
     }
 
-    @GetMapping(value = "/findGroups")
-    public String findAllTeacherGroupsForm(Model model, @ModelAttribute ArrayList<StudyGroup> groups){
-        List<Teacher> teachers = teacherService.findAll();
-        model.addAttribute("teacher", new Teacher());
-        model.addAttribute("teachers", teachers);
-        return "teacher/findTeacherGroups";
-    }
-    @PostMapping(value = "/findGroups")
-    public String findAllTeacherGroups(Model model,@ModelAttribute Teacher teacher){
-        model.addAttribute("groups", teacherService.findTeacherById(teacher.getId()).getGroups());
-        return "teacher/findTeacherGroups";
-    }
+//    @GetMapping(value = "/findGroups")
+//    public String findAllTeacherGroupsForm(Model model, @ModelAttribute ArrayList<StudyGroup> groups){
+//        List<Teacher> teachers = teacherService.findAll();
+//        model.addAttribute("teacher", new Teacher());
+//        model.addAttribute("teachers", teachers);
+//        return "teacher/findTeacherGroups";
+//    }
+//    @PostMapping(value = "/findGroups")
+//    public String findAllTeacherGroups(Model model,@ModelAttribute Teacher teacher){
+//        model.addAttribute("groups", teacherService.findTeacherById(teacher.getId()).getGroups());
+//        return "teacher/findTeacherGroups";
+//    }
+//
+//    @GetMapping(value = "/findSubjects")
+//    public String findAllTeacherSubjectsForm(Model model, @ModelAttribute ArrayList<Subject> subjects){
+//        List<Teacher> teachers = teacherService.findAll();
+//        model.addAttribute("teacher", new Teacher());
+//        model.addAttribute("teachers", teachers);
+//        return "teacher/findTeacherSubjects";
+//    }
+//    @PostMapping(value = "/findSubjects")
+//    public String findAllTeacherSubjects(Model model,@ModelAttribute Teacher teacher){
+//        model.addAttribute("subjects", teacherService.findTeacherById(teacher.getId()).getSubjects());
+//        return "teacher/findTeacherSubjects";
+//    }
 
-    @GetMapping(value = "/findSubjects")
-    public String findAllTeacherSubjectsForm(Model model, @ModelAttribute ArrayList<Subject> subjects){
-        List<Teacher> teachers = teacherService.findAll();
-        model.addAttribute("teacher", new Teacher());
-        model.addAttribute("teachers", teachers);
-        return "teacher/findTeacherSubjects";
-    }
-    @PostMapping(value = "/findSubjects")
-    public String findAllTeacherSubjects(Model model,@ModelAttribute Teacher teacher){
-        model.addAttribute("subjects", teacherService.findTeacherById(teacher.getId()).getSubjects());
-        return "teacher/findTeacherSubjects";
-    }
-
-    @PostMapping(value = "/add")
-    public Teacher addTeacher(@ModelAttribute Teacher teacher){
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody public Teacher addTeacher(@RequestBody Teacher teacher){
+        System.out.println("Teacher");
         teacherService.addTeacher(teacher);
         return teacher;
     }
@@ -77,13 +75,13 @@ public class TeacherController {
         return teacher;
     }
 
-    @GetMapping(value = "/addGroup")
-    public String addTeacherToGroupForm(Model model){
-        model.addAttribute("teacher", new Teacher());
-            model.addAttribute("teachers", teacherService.findAll());
-            model.addAttribute("groups", groupService.findAll());
-        return "teacher/addGroup";
-    }
+//    @GetMapping(value = "/addGroup")
+//    public String addTeacherToGroupForm(Model model){
+//        model.addAttribute("teacher", new Teacher());
+//            model.addAttribute("teachers", teacherService.findAll());
+//            model.addAttribute("groups", groupService.findAll());
+//        return "teacher/addGroup";
+//    }
 
 //    @PostMapping(value = "/addGroup")
 //    public String addTeacherToGroup(@ModelAttribute Teacher teacher){

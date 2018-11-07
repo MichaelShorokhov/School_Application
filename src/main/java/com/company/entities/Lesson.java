@@ -15,29 +15,28 @@ public class Lesson {
     private long id;
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
-    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
     private Date date;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     @JoinColumn(name="group_id")
-    @NotNull
+//    @NotNull
     private StudyGroup group;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name="term_id")
-    @NotNull
+//    @NotNull
     private Term term;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name="subject_id")
-    @NotNull
+//    @NotNull
     private Subject subject;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name="teacher_id")
-    @NotNull
+//    @NotNull
     private Teacher teacher;
 
     public Lesson() {

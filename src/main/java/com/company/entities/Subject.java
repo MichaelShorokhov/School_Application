@@ -1,9 +1,7 @@
 package com.company.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -21,20 +19,18 @@ public class Subject {
     @NotEmpty
     private String name;
 
-    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="student_subject",
             joinColumns = @JoinColumn(name="subject_id"),
             inverseJoinColumns = @JoinColumn(name="student_id"))
-    @NotNull
+    @JsonIgnore
     private List<Student> students = new ArrayList<>();
 
-    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="teacher_subject",
             joinColumns = @JoinColumn(name="subject_id"),
             inverseJoinColumns = @JoinColumn(name="teacher_id"))
-    @NotNull
+    @JsonIgnore
     private List<Teacher> teachers = new ArrayList<>();
 
     public Subject() {

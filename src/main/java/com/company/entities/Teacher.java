@@ -1,7 +1,9 @@
 package com.company.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teacher_seq")
@@ -28,11 +31,9 @@ public class Teacher {
 //    @Pattern(regexp = "(^$[0-9]{10})")
     private String phoneNumber;
 
-    @JsonManagedReference
     @ManyToMany(mappedBy = "teachers", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Subject> subjects = new ArrayList<>();
 
-    @JsonManagedReference
     @ManyToMany(mappedBy = "teachers", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<StudyGroup> groups = new ArrayList<>();
 

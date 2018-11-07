@@ -23,8 +23,7 @@ public class StudyGroupService {
         List<StudyGroup> groups = (ArrayList<StudyGroup>)repository.findAll();
         return groups.stream().sorted(Comparator.comparing(StudyGroup::getId)).collect(Collectors.toList());
     }
-    public void addStudyGroup(StudyGroup group, Course course){
-        group.setCourse(course);
+    public void addStudyGroup(StudyGroup group){
         repository.save(group);
     }
 
@@ -37,8 +36,7 @@ public class StudyGroupService {
         repository.delete(findStudyGroupById(id));
     }
 
-    public void updateStudyGroup(StudyGroup group, Course course){
-        group.setCourse(course);
+    public void updateStudyGroup(StudyGroup group){
         repository.save(group);
     }
 
