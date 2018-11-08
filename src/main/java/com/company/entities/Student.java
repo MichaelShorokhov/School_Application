@@ -16,15 +16,15 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
     @SequenceGenerator(name = "student_seq", sequenceName = "student_id_seq", allocationSize = 1)
     private long id;
-//    @NotEmpty
+    @NotEmpty
     private String name;
-//    @NotEmpty
+    @NotEmpty
     private String surname;
-//    @NotNull
-//    @Max(100)
+    @NotNull
+    @Max(100)
     private int age;
-//    @NotEmpty
-//    @Pattern(regexp = "(^$[0-9]{10})")
+    @NotEmpty
+    @Pattern(regexp = "(^$[0-9]{10})")
     private String phoneNumber;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})

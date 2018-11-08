@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.GroupSequence;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,28 +23,24 @@ import java.util.List;
 public class StudentController {
     @Autowired
     StudentService studentService;
+    @Autowired
+    StudyGroupService groupService;
+    @Autowired
+    SubjectService subjectService;
 
     @GetMapping(value = "/findAll")
     public List<Student> findAllStudents(){
         List<Student> students = studentService.findAll();
         return students;
     }
-//
-//    @GetMapping(value = "/findSubjects")
-//    public String findAllStudentSubjectsForm(Model model, @ModelAttribute ArrayList<Subject> subjects){
-//        List<Student> students = studentService.findAll();
-//        model.addAttribute("student", new Student());
-//        model.addAttribute("students", students);
-//        return "student/findStudentSubjects";
-//    }
-//    @PostMapping(value = "/findSubjects")
-//    public String findAllStudentSubjects(Model model,@ModelAttribute Student student){
-//        model.addAttribute("subjects", studentService.findStudentById(student.getId()).getSubjects());
-//        return "student/findStudentSubjects";
-//    }
+    @PostMapping(value = "/findSubjects")
+    public List<Subject> findAllStudentSubjects(@RequestBody Student student){
+        return studentService.findStudentById(student.getId()).getSubjects();
+    }
 
     @PostMapping(value = "/add")
-    public Student addStudent(@RequestBody Student student){
+    public Student addStudent(@Valid @RequestBody Student student){
+        student.setGroup(groupService.findStudyGroupById(student.getGroup().getId()));
         studentService.addStudent(student);
         return student;
     }
@@ -58,34 +55,18 @@ public class StudentController {
         studentService.updateStudent(student);
         return student;
     }
-//
-//    @GetMapping(value = "/addSubject")
-//    public String addSubjectToStudentForm(Model model){
-//        model.addAttribute("student", new Student());
-//        model.addAttribute("students", studentService.findAll());
-//        model.addAttribute("subjects", subjectService.findAll());
-//        return "student/addSubject";
-//    }
-//
-//    @PostMapping(value = "/addSubject")
-//    public String addSubjectToStudent(@ModelAttribute Student student){
-//        studentService.addSubjectToStudent(studentService.findStudentById(student.getId()),
-//                subjectService.findSubjectById(student.getSubjects().get(0).getId()));
-//        return "redirect:/student";
-//    }
-//
-//    @GetMapping(value = "/removeSubject")
-//    public String removeSubjectFronStudentForm(Model model){
-//        model.addAttribute("student", new Student());
-//        model.addAttribute("students", studentService.findAll());
-//        model.addAttribute("subjects", subjectService.findAll());
-//        return "student/removeSubject";
-//    }
-//
-//    @PostMapping(value = "/removeSubject")
-//    public String removeSubjectFromStudent(@ModelAttribute Student student){
-//        studentService.removeSubjectFromStudent(studentService.findStudentById(student.getId()),
-//                subjectService.findSubjectById(student.getSubjects().get(0).getId()));
-//        return "redirect:/student";
-//    }
+
+    @PostMapping(value = "/addSubject/{id}")
+    public Subject addSubjectToStudent(@PathVariable String id, @RequestBody Subject subject){
+        Subject newSubject = subjectService.findSubjectById(subject.getId());
+        studentService.addSubjectToStudent(studentService.findStudentById(Long.parseLong(id)),
+                newSubject);
+        return newSubject;
+    }
+
+    @PostMapping(value = "/removeSubject/{id}")
+    public void removeSubjectFromStudent(@PathVariable String  id, @RequestBody Subject subject){
+        studentService.removeSubjectFromStudent(studentService.findStudentById(Long.parseLong(id)),
+                subjectService.findSubjectById(subject.getId()));
+    }
 }

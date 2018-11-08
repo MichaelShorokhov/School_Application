@@ -16,6 +16,12 @@ import java.util.List;
 public class MarkForLessonController {
     @Autowired
     MarkForLessonService markForLessonService;
+    @Autowired
+    MarkService markService;
+    @Autowired
+    LessonService lessonService;
+    @Autowired
+    StudentService studentService;
 
     @GetMapping(value = "/findAll")
     public List<MarkForLesson> findAllMarkForLessons(){
@@ -24,6 +30,9 @@ public class MarkForLessonController {
 
     @PostMapping(value = "/add")
     public MarkForLesson addMarkForLesson(@Valid @RequestBody MarkForLesson markForLesson){
+        markForLesson.setMark(markService.findMarkById(markForLesson.getMark().getId()));
+        markForLesson.setLesson(lessonService.findLessonById(markForLesson.getLesson().getId()));
+        markForLesson.setStudent(studentService.findStudentById(markForLesson.getStudent().getId()));
         markForLessonService.addMarkForLesson(markForLesson);
         return markForLesson;
     }

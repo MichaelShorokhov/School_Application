@@ -20,7 +20,6 @@ public class SubjectController {
     @GetMapping(value = "/findAll")
     public List<Subject> findAllSubjects(){
         List<Subject> subjects = service.findAll();
-        System.out.println(subjects.get(2).getName());
         return subjects;
     }
 

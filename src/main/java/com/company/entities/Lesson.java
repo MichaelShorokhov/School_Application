@@ -21,22 +21,22 @@ public class Lesson {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     @JoinColumn(name="group_id")
-//    @NotNull
+    @NotNull
     private StudyGroup group;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name="term_id")
-//    @NotNull
+    @NotNull
     private Term term;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name="subject_id")
-//    @NotNull
+    @NotNull
     private Subject subject;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name="teacher_id")
-//    @NotNull
+    @NotNull
     private Teacher teacher;
 
     public Lesson() {

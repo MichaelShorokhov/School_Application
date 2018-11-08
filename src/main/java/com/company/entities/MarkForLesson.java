@@ -15,17 +15,17 @@ public class MarkForLesson {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "mark_id")
-    //@NotNull
+    @NotNull
     private Mark mark;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "lesson_id")
-    //@NotNull
+    @NotNull
     private Lesson lesson;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "student_id")
-    //@NotNull
+    @NotNull
     private Student student;
 
     public MarkForLesson() {

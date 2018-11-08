@@ -22,6 +22,8 @@ import java.util.Map;
 public class StudyGroupController {
     @Autowired
     StudyGroupService groupService;
+    @Autowired
+    CourseService courseService;
 
     @GetMapping(value = "/findAll")
     public List<StudyGroup> findAllStudyGroups(){
@@ -30,8 +32,8 @@ public class StudyGroupController {
     }
 
     @PostMapping(value = "/add")
-    public StudyGroup addStudyGroup( @RequestBody StudyGroup group){
-        group.getCourse().setId(0);
+    public StudyGroup addStudyGroup(@Valid @RequestBody StudyGroup group){
+        group.setCourse(courseService.findCourseById(group.getCourse().getId()));
         groupService.addStudyGroup(group);
         return group;
     }
@@ -42,7 +44,7 @@ public class StudyGroupController {
     }
 
     @PostMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public StudyGroup updateStudyGroup(@RequestBody StudyGroup group){
+    public StudyGroup updateStudyGroup(@Valid @RequestBody StudyGroup group){
         groupService.updateStudyGroup(group);
         return group;
     }

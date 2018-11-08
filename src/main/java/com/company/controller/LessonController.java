@@ -18,6 +18,14 @@ import java.util.List;
 public class LessonController {
     @Autowired
     LessonService lessonService;
+    @Autowired
+    SubjectService subjectService;
+    @Autowired
+    TermService termService;
+    @Autowired
+    TeacherService teacherService;
+    @Autowired
+    StudyGroupService groupService;
 
     @GetMapping(value = "/findAll")
     public List<Lesson> findAllLessons(){
@@ -26,7 +34,11 @@ public class LessonController {
 
 
     @PostMapping(value = "/add")
-    public Lesson addLesson(@RequestBody Lesson lesson){
+    public Lesson addLesson(@Valid @RequestBody Lesson lesson){
+        lesson.setSubject(subjectService.findSubjectById(lesson.getSubject().getId()));
+        lesson.setTerm(termService.findTermById(lesson.getTerm().getId()));
+        lesson.setTeacher(teacherService.findTeacherById(lesson.getTeacher().getId()));
+        lesson.setGroup(groupService.findStudyGroupById(lesson.getGroup().getId()));
         lessonService.addLesson(lesson);
         return lesson;
     }

@@ -24,6 +24,10 @@ import java.util.List;
 public class TeacherController {
     @Autowired
     TeacherService teacherService;
+    @Autowired
+    SubjectService subjectService;
+    @Autowired
+    StudyGroupService groupService;
 
     @GetMapping(value = "/findAll")
     public List<Teacher> findAllTeachers(){
@@ -31,35 +35,19 @@ public class TeacherController {
         return teachers;
     }
 
-//    @GetMapping(value = "/findGroups")
-//    public String findAllTeacherGroupsForm(Model model, @ModelAttribute ArrayList<StudyGroup> groups){
-//        List<Teacher> teachers = teacherService.findAll();
-//        model.addAttribute("teacher", new Teacher());
-//        model.addAttribute("teachers", teachers);
-//        return "teacher/findTeacherGroups";
-//    }
-//    @PostMapping(value = "/findGroups")
-//    public String findAllTeacherGroups(Model model,@ModelAttribute Teacher teacher){
-//        model.addAttribute("groups", teacherService.findTeacherById(teacher.getId()).getGroups());
-//        return "teacher/findTeacherGroups";
-//    }
-//
-//    @GetMapping(value = "/findSubjects")
-//    public String findAllTeacherSubjectsForm(Model model, @ModelAttribute ArrayList<Subject> subjects){
-//        List<Teacher> teachers = teacherService.findAll();
-//        model.addAttribute("teacher", new Teacher());
-//        model.addAttribute("teachers", teachers);
-//        return "teacher/findTeacherSubjects";
-//    }
-//    @PostMapping(value = "/findSubjects")
-//    public String findAllTeacherSubjects(Model model,@ModelAttribute Teacher teacher){
-//        model.addAttribute("subjects", teacherService.findTeacherById(teacher.getId()).getSubjects());
-//        return "teacher/findTeacherSubjects";
-//    }
+    @PostMapping(value = "/findGroups")
+    public List<StudyGroup> findAllTeacherGroups(@RequestBody  Teacher teacher){
+        return teacherService.findTeacherById(teacher.getId()).getGroups();
+    }
+
+    @PostMapping(value = "/findSubjects")
+    public List<Subject> findAllTeacherSubjects(@RequestBody Teacher teacher){
+
+        return teacherService.findTeacherById(teacher.getId()).getSubjects();
+    }
 
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody public Teacher addTeacher(@RequestBody Teacher teacher){
-        System.out.println("Teacher");
+    @ResponseBody public Teacher addTeacher(@Valid @RequestBody Teacher teacher){
         teacherService.addTeacher(teacher);
         return teacher;
     }
@@ -75,63 +63,29 @@ public class TeacherController {
         return teacher;
     }
 
-//    @GetMapping(value = "/addGroup")
-//    public String addTeacherToGroupForm(Model model){
-//        model.addAttribute("teacher", new Teacher());
-//            model.addAttribute("teachers", teacherService.findAll());
-//            model.addAttribute("groups", groupService.findAll());
-//        return "teacher/addGroup";
-//    }
+    @PostMapping(value = "/addGroup/{id}")
+    public StudyGroup addTeacherToGroup(@PathVariable String id, @RequestBody StudyGroup group){
+        StudyGroup newGroup = groupService.findStudyGroupById(group.getId());
+        teacherService.addTeacherToGroup(teacherService.findTeacherById(Long.parseLong(id)), newGroup);
+        return newGroup;
+    }
 
-//    @PostMapping(value = "/addGroup")
-//    public String addTeacherToGroup(@ModelAttribute Teacher teacher){
-//        teacherService.addTeacherToGroup(teacherService.findTeacherById(teacher.getId()),
-//                groupService.findStudyGroupById(teacher.getGroups().get(0).getId()));
-//        return "redirect:/teacher";
-//    }
-//
-//    @GetMapping(value = "/removeGroup")
-//    public String removeTeacherFromGroupForm(Model model){
-//        model.addAttribute("teacher", new Teacher());
-//        model.addAttribute("teachers", teacherService.findAll());
-//        model.addAttribute("groups", groupService.findAll());
-//        return "teacher/removeGroup";
-//    }
-//
-//    @PostMapping(value = "/removeGroup")
-//    public String removeTeacherFromGroup(@ModelAttribute Teacher teacher){
-//        teacherService.removeTeacherFromGroup(teacherService.findTeacherById(teacher.getId()),
-//                groupService.findStudyGroupById(teacher.getGroups().get(0).getId()));
-//        return "redirect:/teacher";
-//    }
-//
-//    @GetMapping(value = "/addSubject")
-//    public String addSubjectToTeacherForm(Model model){
-//        model.addAttribute("teacher", new Teacher());
-//        model.addAttribute("teachers", teacherService.findAll());
-//        model.addAttribute("subjects", subjectService.findAll());
-//        return "teacher/addSubject";
-//    }
-//
-//    @PostMapping(value = "/addSubject")
-//    public String addSubjectToTeacher(@ModelAttribute Teacher teacher){
-//        teacherService.addSubjectToTeacher(teacherService.findTeacherById(teacher.getId()),
-//                subjectService.findSubjectById(teacher.getSubjects().get(0).getId()));
-//        return "redirect:/teacher";
-//    }
-//
-//    @GetMapping(value = "/removeSubject")
-//    public String removeSubjectFronTeacherForm(Model model){
-//        model.addAttribute("teacher", new Teacher());
-//        model.addAttribute("teachers", teacherService.findAll());
-//        model.addAttribute("subjects", subjectService.findAll());
-//        return "teacher/removeSubject";
-//    }
-//
-//    @PostMapping(value = "/removeSubject")
-//    public String removeSubjectFromTeacher(@ModelAttribute Teacher teacher){
-//        teacherService.removeSubjectFromTeacher(teacherService.findTeacherById(teacher.getId()),
-//                subjectService.findSubjectById(teacher.getSubjects().get(0).getId()));
-//        return "redirect:/teacher";
-//    }
+    @PostMapping(value = "/removeGroup/{id}")
+    public void removeTeacherFromGroup(@PathVariable String id, @RequestBody StudyGroup group){
+        teacherService.removeTeacherFromGroup(teacherService.findTeacherById(Long.parseLong(id)),
+                groupService.findStudyGroupById(group.getId()));
+    }
+
+    @PostMapping(value = "/addSubject/{id}")
+    public Subject addSubjectToTeacher(@PathVariable String id,@RequestBody Subject subject){
+        Subject newSubject = subjectService.findSubjectById(subject.getId());
+        teacherService.addSubjectToTeacher(teacherService.findTeacherById(Long.parseLong(id)), newSubject);
+        return newSubject;
+    }
+
+    @PostMapping(value = "/removeSubject/{id}")
+    public void removeSubjectFromTeacher(@PathVariable String id,@RequestBody Subject subject){
+        teacherService.removeSubjectFromTeacher(teacherService.findTeacherById(Long.parseLong(id)),
+                subjectService.findSubjectById(subject.getId()));
+    }
 }
