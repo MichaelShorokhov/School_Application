@@ -12,9 +12,5 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping(value = "/")
 public class HomeController {
-    @GetMapping (value = "")
-    public String startPageForm(Model model){
-        return "homePage";
-    }
 
 }

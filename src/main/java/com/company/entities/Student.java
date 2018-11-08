@@ -1,6 +1,7 @@
 package com.company.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
@@ -24,12 +24,16 @@ public class Student {
     @Max(100)
     private int age;
     @NotEmpty
-    @Pattern(regexp = "(^$[0-9]{10})")
+//    @Pattern(regexp = "(^$[0-9]{10})")
     private String phoneNumber;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     @JoinColumn(name="group_id")
     private StudyGroup group;
+
+    @OneToMany(mappedBy = "student", orphanRemoval = true)
+    @JsonIgnore
+    private List<MarkForLesson> marksForLessons = new ArrayList<>();
 
     @ManyToMany(mappedBy = "students", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Subject> subjects = new ArrayList<>();

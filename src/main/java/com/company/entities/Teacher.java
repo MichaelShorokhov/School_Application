@@ -1,9 +1,6 @@
 package com.company.entities;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -36,6 +33,11 @@ public class Teacher {
 
     @ManyToMany(mappedBy = "teachers", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<StudyGroup> groups = new ArrayList<>();
+
+    @OneToMany(mappedBy = "teacher", orphanRemoval = true)
+    @JsonIgnore
+    private List<Lesson> lessons = new ArrayList<>();
+
 
     public List<Subject> getSubjects() {
         return subjects;

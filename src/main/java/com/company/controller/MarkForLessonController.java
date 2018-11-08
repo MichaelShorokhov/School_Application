@@ -44,6 +44,9 @@ public class MarkForLessonController {
 
     @PostMapping(value = "/update")
     public MarkForLesson updateStudent(@Valid @RequestBody MarkForLesson markForLesson){
+        markForLesson.setMark(markService.findMarkById(markForLesson.getMark().getId()));
+        markForLesson.setLesson(lessonService.findLessonById(markForLesson.getLesson().getId()));
+        markForLesson.setStudent(studentService.findStudentById(markForLesson.getStudent().getId()));
         markForLessonService.updateMarkForLesson(markForLesson);
         return markForLesson;
     }

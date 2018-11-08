@@ -1,12 +1,15 @@
 package com.company.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Term {
@@ -26,6 +29,10 @@ public class Term {
     private Date endDate;
     @Column(name = "isclosed")
     private boolean isClosed;
+    @OneToMany(mappedBy = "term", orphanRemoval = true)
+    @JsonIgnore
+    private List<Lesson> lessons = new ArrayList<>();
+
 
     public Term() {
     }

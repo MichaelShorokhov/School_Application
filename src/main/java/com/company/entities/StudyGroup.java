@@ -37,6 +37,15 @@ public class StudyGroup {
     @JsonIgnore
     private List<Teacher> teachers = new ArrayList<>();
 
+    @OneToMany(mappedBy = "group", orphanRemoval = true)
+    @JsonIgnore
+    private List<Student> students = new ArrayList<>();
+
+    @OneToMany(mappedBy = "group", orphanRemoval = true)
+    @JsonIgnore
+    private List<Lesson> lessons = new ArrayList<>();
+
+
     public long getId() {
         return id;
     }

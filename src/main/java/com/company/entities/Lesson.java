@@ -1,10 +1,13 @@
 package com.company.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Lesson {
@@ -38,6 +41,10 @@ public class Lesson {
     @JoinColumn(name="teacher_id")
     @NotNull
     private Teacher teacher;
+
+    @OneToMany(mappedBy = "lesson", orphanRemoval = true)
+    @JsonIgnore
+    private List<MarkForLesson> marksForLessons = new ArrayList<>();
 
     public Lesson() {
     }

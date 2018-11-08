@@ -1,9 +1,13 @@
 package com.company.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "mark")
@@ -14,6 +18,9 @@ public class Mark{
     private long id;
     @NotEmpty
     private String value;
+    @OneToMany(mappedBy = "mark", orphanRemoval = true)
+    @JsonIgnore
+    private List<MarkForLesson> marksForLessons = new ArrayList<>();
 
     public void setId(long id) {
         this.id = id;

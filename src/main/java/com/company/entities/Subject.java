@@ -33,6 +33,10 @@ public class Subject {
     @JsonIgnore
     private List<Teacher> teachers = new ArrayList<>();
 
+    @OneToMany(mappedBy = "subject", orphanRemoval = true)
+    @JsonIgnore
+    private List<Lesson> lessons = new ArrayList<>();
+
     public Subject() {
     }
 
