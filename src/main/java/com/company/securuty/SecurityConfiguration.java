@@ -29,9 +29,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().and().authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/**").permitAll().and().csrf().disable();
-//        http.csrf().and().authorizeRequests()
+//        http.and().authorizeRequests()
 //                .antMatchers("/").hasAnyRole("TEACHER", "STUDENT")
 ////                .access("hasRole('TEACHER') and hasRole('STUDENT')")
 //                .antMatchers("/mark/**").hasRole("TEACHER")
@@ -49,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 //                .antMatchers("/markForLesson/find").permitAll()
 //                .antMatchers("/markForLesson/findAll").permitAll()
 //                .antMatchers("/markForLesson/add").hasRole("TEACHER")
-//                .and().formLogin().and().logout().permitAll();
+//                .and().formLogin().and().logout().permitAll().and().csrf().disable();
     }
 
 }
