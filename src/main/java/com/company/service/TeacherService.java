@@ -3,7 +3,6 @@ package com.company.service;
 import com.company.entities.StudyGroup;
 import com.company.entities.Subject;
 import com.company.entities.Teacher;
-import com.company.repository.SubjectRepository;
 import com.company.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -13,8 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.security.acl.Group;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service

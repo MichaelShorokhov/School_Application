@@ -1,20 +1,14 @@
 package com.company.controller;
 
-import com.company.entities.Course;
-import com.company.entities.StudyGroup;
-import com.company.entities.Subject;
 import com.company.entities.Student;
+import com.company.entities.Subject;
+import com.company.service.StudentService;
 import com.company.service.StudyGroupService;
 import com.company.service.SubjectService;
-import com.company.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.GroupSequence;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

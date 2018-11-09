@@ -1,9 +1,7 @@
 package com.company.service;
 
 import com.company.entities.Course;
-import com.company.entities.Mark;
 import com.company.repository.CourseRepository;
-import com.company.repository.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

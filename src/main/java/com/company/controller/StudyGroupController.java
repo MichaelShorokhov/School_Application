@@ -1,20 +1,14 @@
 package com.company.controller;
 
-import com.company.entities.Course;
 import com.company.entities.StudyGroup;
 import com.company.service.CourseService;
 import com.company.service.StudyGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.acl.Group;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @CrossOrigin

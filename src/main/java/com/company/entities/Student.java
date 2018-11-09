@@ -1,9 +1,6 @@
 package com.company.entities;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -24,7 +21,6 @@ public class Student {
     @Max(100)
     private int age;
     @NotEmpty
-//    @Pattern(regexp = "(^$[0-9]{10})")
     private String phoneNumber;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})

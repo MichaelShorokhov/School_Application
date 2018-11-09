@@ -1,10 +1,11 @@
 package com.company.controller;
 
 import com.company.entities.MarkForLesson;
-import com.company.service.*;
+import com.company.service.LessonService;
+import com.company.service.MarkForLessonService;
+import com.company.service.MarkService;
+import com.company.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

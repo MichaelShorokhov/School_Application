@@ -1,10 +1,6 @@
 package com.company.entities;
 
 import com.fasterxml.jackson.annotation.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
@@ -25,7 +21,6 @@ public class Teacher {
     @Max(100)
     private int age;
     @NotEmpty
-    @Pattern(regexp = "(^$[0-9]{10})")
     private String phoneNumber;
 
     @ManyToMany(mappedBy = "teachers", cascade = {CascadeType.PERSIST, CascadeType.MERGE})

@@ -1,12 +1,8 @@
 package com.company.controller;
 
-import com.company.entities.Course;
 import com.company.entities.Lesson;
-import com.company.entities.Teacher;
 import com.company.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
