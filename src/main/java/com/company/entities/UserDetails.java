@@ -1,14 +1,15 @@
 package com.company.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class UserDetails {
     @Id
     String login;
-
+    @NotEmpty
     String password;
-
+    @NotEmpty
     String auth;
 
     public UserDetails(String login, String password, String auth) {

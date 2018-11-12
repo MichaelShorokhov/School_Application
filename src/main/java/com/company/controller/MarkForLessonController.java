@@ -36,6 +36,7 @@ public class MarkForLessonController {
         markForLesson.setStudent(studentService.findStudentById(markForLesson.getStudent().getId()));
         markForLessonService.addMarkForLesson(markForLesson);
         return markForLesson;
+
     }
 
     @DeleteMapping(value = "/remove/{id}")

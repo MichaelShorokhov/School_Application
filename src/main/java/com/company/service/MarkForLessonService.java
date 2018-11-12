@@ -21,8 +21,6 @@ public class MarkForLessonService {
 
     @Autowired
     private MarkForLessonRepository repository;
-    @PersistenceContext
-    EntityManager em;
 
     public List<MarkForLesson> findAll(){
         List<MarkForLesson> markForLessons = (ArrayList<MarkForLesson>)repository.findAll();
@@ -44,24 +42,6 @@ public class MarkForLessonService {
 
     public void updateMarkForLesson(MarkForLesson markForLesson){
         repository.save(markForLesson);
-    }
-    public List<MarkForLesson> findMarkForLesson(MarkForLesson markForLesson){
-        if (markForLesson.getMark()==null){markForLesson.setMark(new Mark());}
-        if (markForLesson.getStudent()==null){markForLesson.setStudent(new Student());}
-        if (markForLesson.getLesson()==null){markForLesson.setLesson(new Lesson());}
-        Query query = em.createNativeQuery(
-                "select * from mark_for_lesson "
-                        + "where ((mark_id=:mark_id) or not :bymark) "
-                        + "and ((student_id=:student_id) or not :bystudent) "
-                        + "and ((lesson_id=:lesson_id) or not :bylesson) ", MarkForLesson.class)
-                .setParameter("mark_id", markForLesson.getMark().getId())
-                .setParameter("bymark", markForLesson.getMark().getId()!=0)
-                .setParameter("student_id", markForLesson.getStudent().getId())
-                .setParameter("bystudent", markForLesson.getStudent().getId()!=0)
-                .setParameter("lesson_id", markForLesson.getLesson().getId())
-                .setParameter("bylesson", markForLesson.getLesson().getId()!=0);
-        List<MarkForLesson> markForLessons = query.getResultList();
-        return markForLessons;
     }
 
 }
