@@ -2,6 +2,7 @@ package com.company.controller;
 
 import com.company.entities.StudyGroup;
 import com.company.service.CourseService;
+import com.company.service.StudentService;
 import com.company.service.StudyGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,6 +19,8 @@ public class StudyGroupController {
     StudyGroupService groupService;
     @Autowired
     CourseService courseService;
+    @Autowired
+    StudentService studentService;
 
     @GetMapping(value = "/findAll")
     public List<StudyGroup> findAllStudyGroups(){
@@ -37,8 +40,9 @@ public class StudyGroupController {
         groupService.removeStudyGroup(Long.parseLong(id));
     }
 
-    @PostMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/update")
     public StudyGroup updateStudyGroup(@Valid @RequestBody StudyGroup group){
+        group.setTeachers(groupService.findStudyGroupById(group.getId()).getTeachers());
         groupService.updateStudyGroup(group);
         return group;
     }

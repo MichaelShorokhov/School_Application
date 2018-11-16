@@ -46,6 +46,10 @@ public class LessonController {
 
     @PostMapping(value = "/update")
     public Lesson updateStudent(@Valid @RequestBody Lesson lesson){
+        lesson.setSubject(subjectService.findSubjectById(lesson.getSubject().getId()));
+        lesson.setTerm(termService.findTermById(lesson.getTerm().getId()));
+        lesson.setTeacher(teacherService.findTeacherById(lesson.getTeacher().getId()));
+        lesson.setGroup(groupService.findStudyGroupById(lesson.getGroup().getId()));
         lessonService.updateLesson(lesson);
         return lesson;
     }

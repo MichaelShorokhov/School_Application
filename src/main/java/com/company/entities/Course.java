@@ -21,6 +21,15 @@ public class Course {
     @Min(2000)
     @Max(2050)
     private int year;
+
+    public List<StudyGroup> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<StudyGroup> groups) {
+        this.groups = groups;
+    }
+
     @OneToMany(mappedBy = "course", orphanRemoval = true)
     @JsonIgnore
     private List<StudyGroup> groups = new ArrayList<>();

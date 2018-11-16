@@ -1,6 +1,9 @@
 package com.company.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -23,7 +26,7 @@ public class Student {
     @NotEmpty
     private String phoneNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name="group_id")
     private StudyGroup group;
 
@@ -31,7 +34,7 @@ public class Student {
     @JsonIgnore
     private List<MarkForLesson> marksForLessons = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "students", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "students",  cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Subject> subjects = new ArrayList<>();
 
     public long getId() {

@@ -54,6 +54,8 @@ public class TeacherController {
 
     @PostMapping(value = "/update")
     public Teacher updateTeacher(@Valid @RequestBody Teacher teacher){
+        teacher.setGroups(teacherService.findTeacherById(teacher.getId()).getGroups());
+        teacher.setSubjects(teacherService.findTeacherById(teacher.getId()).getSubjects());
         teacherService.updateTeacher(teacher);
         return teacher;
     }

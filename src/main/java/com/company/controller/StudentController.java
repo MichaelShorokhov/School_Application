@@ -46,6 +46,7 @@ public class StudentController {
 
     @PostMapping(value = "/update")
     public Student updateStudent(@Valid @RequestBody Student student){
+        student.setSubjects(studentService.findStudentById(student.getId()).getSubjects());
         studentService.updateStudent(student);
         return student;
     }

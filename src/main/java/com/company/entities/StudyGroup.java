@@ -25,14 +25,22 @@ public class StudyGroup {
     @NotNull
     private Course course;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="teacher_group",
                 joinColumns = @JoinColumn(name="group_id"),
                 inverseJoinColumns = @JoinColumn(name="teacher_id"))
     @JsonIgnore
     private List<Teacher> teachers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "group", orphanRemoval = true)
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    @OneToMany(mappedBy = "group")
     @JsonIgnore
     private List<Student> students = new ArrayList<>();
 

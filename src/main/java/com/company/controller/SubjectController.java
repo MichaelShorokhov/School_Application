@@ -34,6 +34,8 @@ public class SubjectController {
 
     @PostMapping(value = "/update")
     public Subject updateSubject(@Valid @RequestBody Subject subject){
+        subject.setStudents(service.findSubjectById(subject.getId()).getStudents());
+        subject.setTeachers(service.findSubjectById(subject.getId()).getTeachers());
         service.updateSubject(subject);
         return subject;
     }

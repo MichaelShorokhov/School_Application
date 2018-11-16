@@ -12,6 +12,11 @@ public class UserDetails {
     @NotEmpty
     String auth;
 
+    public UserDetails(String login, @NotEmpty String password) {
+        this.login = login;
+        this.password = password;
+    }
+
     public UserDetails(String login, String password, String auth) {
         this.login = login;
         this.password = password;

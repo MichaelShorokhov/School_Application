@@ -15,6 +15,8 @@ public class CourseService {
 
     @Autowired
     private CourseRepository repository;
+    @Autowired
+    private StudyGroupService groupService;
 
     public List<Course> findAll(){
         List<Course> courses = (ArrayList<Course>)repository.findAll();
@@ -31,7 +33,8 @@ public class CourseService {
     }
 
     public void removeCourse(long id){
-        repository.delete(findCourseById(id));
+        findCourseById(id).getGroups().forEach(group -> groupService.removeStudyGroup(group.getId()));
+        repository.deleteById(id);
     }
 
     public void updateCourse(Course course){

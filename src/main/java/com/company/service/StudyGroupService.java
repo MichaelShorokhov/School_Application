@@ -1,6 +1,7 @@
 package com.company.service;
 
 import com.company.entities.StudyGroup;
+import com.company.repository.StudentRepository;
 import com.company.repository.StudyGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ public class StudyGroupService {
 
     @Autowired
     private StudyGroupRepository repository;
+    @Autowired
+    private StudentService studentService;
 
 
     public List<StudyGroup> findAll(){
@@ -31,7 +34,8 @@ public class StudyGroupService {
     }
 
     public void removeStudyGroup(long id){
-        repository.delete(findStudyGroupById(id));
+        findStudyGroupById(id).getStudents().forEach(student -> studentService.removeStudent(student.getId()));
+        repository.deleteById(id);
     }
 
     public void updateStudyGroup(StudyGroup group){

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PreRemove;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -40,11 +41,7 @@ public class StudentService {
     }
 
     public void removeStudent(long id){
-        Student student = findStudentById(id);
-        while (!student.getSubjects().isEmpty()){
-            student.removeSubject(student.getSubjects().get(0));
-        }
-        repository.delete(findStudentById(id));
+        repository.deleteById(id);
     }
 
     public void updateStudent(Student student){
@@ -67,7 +64,6 @@ public class StudentService {
         return student;
     }
 
-    @Transactional
     public List<Student> findStudent(Student student){
         Query query = em.createNativeQuery(
                 "select * from student "
