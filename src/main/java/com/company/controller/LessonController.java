@@ -12,17 +12,10 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/lesson")
+@Transactional
 public class LessonController {
     @Autowired
     LessonService lessonService;
-    @Autowired
-    SubjectService subjectService;
-    @Autowired
-    TermService termService;
-    @Autowired
-    TeacherService teacherService;
-    @Autowired
-    StudyGroupService groupService;
 
     @GetMapping(value = "/findAll")
     public List<Lesson> findAllLessons(){
@@ -32,10 +25,6 @@ public class LessonController {
     @Transactional
     @PostMapping(value = "/add")
     public Lesson addLesson(@Valid @RequestBody Lesson lesson){
-        lesson.setSubject(subjectService.findSubjectById(lesson.getSubject().getId()));
-        lesson.setTerm(termService.findTermById(lesson.getTerm().getId()));
-        lesson.setTeacher(teacherService.findTeacherById(lesson.getTeacher().getId()));
-        lesson.setGroup(groupService.findStudyGroupById(lesson.getGroup().getId()));
         lessonService.addLesson(lesson);
         return lesson;
     }
@@ -44,13 +33,8 @@ public class LessonController {
     public void removeLesson(@PathVariable String id){
         lessonService.removeLesson(Long.parseLong(id));
     }
-    @Transactional
     @PostMapping(value = "/update")
     public Lesson updateStudent(@Valid @RequestBody Lesson lesson){
-        lesson.setSubject(subjectService.findSubjectById(lesson.getSubject().getId()));
-        lesson.setTerm(termService.findTermById(lesson.getTerm().getId()));
-        lesson.setTeacher(teacherService.findTeacherById(lesson.getTeacher().getId()));
-        lesson.setGroup(groupService.findStudyGroupById(lesson.getGroup().getId()));
         lessonService.updateLesson(lesson);
         return lesson;
     }

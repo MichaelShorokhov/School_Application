@@ -17,10 +17,6 @@ import java.util.List;
 public class StudyGroupController {
     @Autowired
     StudyGroupService groupService;
-    @Autowired
-    CourseService courseService;
-    @Autowired
-    StudentService studentService;
 
     @GetMapping(value = "/findAll")
     public List<StudyGroup> findAllStudyGroups(){
@@ -30,7 +26,6 @@ public class StudyGroupController {
 
     @PostMapping(value = "/add")
     public StudyGroup addStudyGroup(@Valid @RequestBody StudyGroup group){
-        group.setCourse(courseService.findCourseById(group.getCourse().getId()));
         groupService.addStudyGroup(group);
         return group;
     }

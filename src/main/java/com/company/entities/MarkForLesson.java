@@ -12,17 +12,17 @@ public class MarkForLesson {
     @SequenceGenerator(name = "mark4lesson_seq", sequenceName = "mark4lesson_id_seq", allocationSize = 1)
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mark_id")
     @NotNull
     private Mark mark;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lesson_id")
     @NotNull
     private Lesson lesson;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
     @NotNull
     private Student student;

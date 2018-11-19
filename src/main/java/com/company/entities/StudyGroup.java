@@ -20,7 +20,7 @@ public class StudyGroup {
     @NotEmpty
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="course_id")
     @NotNull
     private Course course;

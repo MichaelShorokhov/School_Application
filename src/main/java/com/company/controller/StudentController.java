@@ -18,8 +18,6 @@ public class StudentController {
     @Autowired
     StudentService studentService;
     @Autowired
-    StudyGroupService groupService;
-    @Autowired
     SubjectService subjectService;
 
     @GetMapping(value = "/findAll")
@@ -34,7 +32,6 @@ public class StudentController {
 
     @PostMapping(value = "/add")
     public Student addStudent(@Valid @RequestBody Student student){
-        student.setGroup(groupService.findStudyGroupById(student.getGroup().getId()));
         studentService.addStudent(student);
         return student;
     }

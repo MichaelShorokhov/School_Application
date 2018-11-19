@@ -26,7 +26,7 @@ public class Student {
     @NotEmpty
     private String phoneNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="group_id")
     private StudyGroup group;
 
