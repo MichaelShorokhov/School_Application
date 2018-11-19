@@ -10,7 +10,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfFilter;
+
+import javax.servlet.http.HttpSession;
 
 @Configuration
 @EnableWebSecurity
@@ -30,17 +36,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic().and().csrf().disable()
+        http
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .httpBasic().and()
                 .authorizeRequests()
-                .antMatchers("/", "/login", "login/**").permitAll()
-                .antMatchers("/mark").hasRole("TEACHER")
-                .antMatchers("/subject").hasRole("TEACHER")
-                .antMatchers("/course").hasRole("TEACHER")
-                .antMatchers("/teacher").hasRole("TEACHER")
-                .antMatchers("/student").hasRole("TEACHER")
-                .antMatchers("/term").hasRole("TEACHER")
-                .antMatchers("/group").hasRole("TEACHER")
-//                .anyRequest().authenticated()
+                .antMatchers("/", "/login").permitAll()
+//                .antMatchers("/mark/**").hasRole("TEACHER")
+                .anyRequest().authenticated()
+                .and().csrf().disable()
+//        .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+//        .and().addFilterAfter(new CORSFilter(), CsrfFilter.class)
         ;
 
     }

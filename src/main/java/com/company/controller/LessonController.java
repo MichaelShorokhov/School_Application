@@ -3,6 +3,7 @@ package com.company.controller;
 import com.company.entities.Lesson;
 import com.company.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,7 +29,7 @@ public class LessonController {
         return  lessonService.findAll();
     }
 
-
+    @Transactional
     @PostMapping(value = "/add")
     public Lesson addLesson(@Valid @RequestBody Lesson lesson){
         lesson.setSubject(subjectService.findSubjectById(lesson.getSubject().getId()));
@@ -43,7 +44,7 @@ public class LessonController {
     public void removeLesson(@PathVariable String id){
         lessonService.removeLesson(Long.parseLong(id));
     }
-
+    @Transactional
     @PostMapping(value = "/update")
     public Lesson updateStudent(@Valid @RequestBody Lesson lesson){
         lesson.setSubject(subjectService.findSubjectById(lesson.getSubject().getId()));

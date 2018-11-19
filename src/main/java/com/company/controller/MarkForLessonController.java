@@ -6,6 +6,7 @@ import com.company.service.MarkForLessonService;
 import com.company.service.MarkService;
 import com.company.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,7 +29,7 @@ public class MarkForLessonController {
     public List<MarkForLesson> findAllMarkForLessons(){
         return markForLessonService.findAll();
     }
-
+    @Transactional
     @PostMapping(value = "/add")
     public MarkForLesson addMarkForLesson(@Valid @RequestBody MarkForLesson markForLesson){
         markForLesson.setMark(markService.findMarkById(markForLesson.getMark().getId()));
@@ -43,7 +44,7 @@ public class MarkForLessonController {
     public void removeMarkForLesson(@PathVariable String id){
         markForLessonService.removeMarkForLesson(Long.parseLong(id));
     }
-
+    @Transactional
     @PostMapping(value = "/update")
     public MarkForLesson updateStudent(@Valid @RequestBody MarkForLesson markForLesson){
         markForLesson.setMark(markService.findMarkById(markForLesson.getMark().getId()));

@@ -23,7 +23,7 @@ import java.util.List;
     }
 
     @PostMapping(value = "/add")
-    public Mark addMark(@Valid @RequestBody Mark mark, BindingResult bindingResult){
+    public Mark addMark(@Valid @RequestBody Mark mark){
         service.addMark(mark);
         return mark;
     }

@@ -5,6 +5,7 @@ import com.company.repository.StudentRepository;
 import com.company.repository.StudyGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -32,7 +33,7 @@ public class StudyGroupService {
         StudyGroup group = repository.findById(id).get();
         return group;
     }
-
+    @Transactional
     public void removeStudyGroup(long id){
         findStudyGroupById(id).getStudents().forEach(student -> studentService.removeStudent(student.getId()));
         repository.deleteById(id);
