@@ -41,6 +41,7 @@ public class StudentService {
     }
 
     public void removeStudent(long id){
+//        repository.delete(findStudentById(id));
         repository.deleteById(id);
     }
 

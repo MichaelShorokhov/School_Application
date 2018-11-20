@@ -12,7 +12,7 @@ import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface StudentRepository extends CrudRepository<Student,Long> {
+public interface StudentRepository extends JpaRepository<Student,Long> {
 
     @Transactional
     @Modifying
