@@ -2,6 +2,7 @@ package com.company.service;
 
 import com.company.entities.Student;
 import com.company.entities.Subject;
+import com.company.repository.MarkForLessonRepository;
 import com.company.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -18,11 +19,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Scope(value = "prototype")
 public class StudentService {
 
     @Autowired
     private StudentRepository repository;
+    @Autowired
+    private MarkForLessonRepository markForLessonRepository;
     @PersistenceContext
     EntityManager em;
 
@@ -41,6 +43,7 @@ public class StudentService {
     }
 
     public void removeStudent(long id){
+        markForLessonRepository.deleteByStudent(findStudentById(id));
 //        repository.delete(findStudentById(id));
         repository.deleteById(id);
     }

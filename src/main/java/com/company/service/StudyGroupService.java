@@ -1,6 +1,7 @@
 package com.company.service;
 
 import com.company.entities.StudyGroup;
+import com.company.repository.LessonRepository;
 import com.company.repository.StudentRepository;
 import com.company.repository.StudyGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class StudyGroupService {
 
     @Autowired
     private StudyGroupRepository repository;
+    @Autowired
+    private LessonRepository lessonRepository;
     @Autowired
     private StudentService studentService;
 
@@ -36,6 +39,7 @@ public class StudyGroupService {
     @Transactional
     public void removeStudyGroup(long id){
         findStudyGroupById(id).getStudents().forEach(student -> studentService.removeStudent(student.getId()));
+        lessonRepository.deleteByGroup(findStudyGroupById(id));
         repository.deleteById(id);
     }
 

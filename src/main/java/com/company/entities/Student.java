@@ -30,7 +30,7 @@ public class Student {
     @JoinColumn(name="group_id")
     private StudyGroup group;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "student", orphanRemoval = true)
     @JsonIgnore
     private List<MarkForLesson> marksForLessons = new ArrayList<>();
 
