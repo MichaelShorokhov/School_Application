@@ -21,7 +21,7 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import javax.servlet.http.HttpSession;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Autowired
@@ -39,13 +39,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .httpBasic().and()
                 .authorizeRequests()
                 .antMatchers("/", "/login").permitAll()
 //                .antMatchers("/mark/**").hasRole("TEACHER")
-                .anyRequest().authenticated()
+//                .anyRequest().authenticated()
                 .and().csrf().disable()
 //        .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 //        .and().addFilterAfter(new CORSFilter(), CsrfFilter.class)

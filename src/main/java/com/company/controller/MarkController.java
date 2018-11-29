@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/mark")
-    public class MarkController {
+public class MarkController {
     @Autowired
     MarkService service;
 
@@ -34,7 +34,7 @@ import java.util.List;
     }
 
     @PostMapping(value = "/update")
-    public Mark updateMark(@Valid @RequestBody Mark mark, BindingResult bindingResult){
+    public Mark updateMark(@Valid @RequestBody Mark mark){
         service.updateMark(mark);
         return mark;
     }

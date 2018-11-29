@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="SchoolApp">
+<head>
+  <meta charset="UTF-8">
+  <title>SchoolApp</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.20/angular-ui-router.js"></script>
+
+
+  <script src="app/app.module.js"></script>
+  <script src="app/app.state.js"></script>
+
+  <!-- states -->
+  <script src="app/states/course.state.js"></script>
+  <script src="app/states/group.state.js"></script>
+  <script src="app/states/lesson.state.js"></script>
+  <script src="app/states/login.state.js"></script>
+  <script src="app/states/mark.state.js"></script>
+  <script src="app/states/markforlesson.state.js"></script>
+  <script src="app/states/student.state.js"></script>
+  <script src="app/states/student-subject.state.js"></script>
+  <script src="app/states/subject.state.js"></script>
+  <script src="app/states/teacher.state.js"></script>
+  <script src="app/states/teacher-group.state.js"></script>
+  <script src="app/states/teacher-subject.state.js"></script>
+  <script src="app/states/term.state.js"></script>
+
+  <!-- services -->
+  <script src="app/service/course.service.js"></script>
+  <script src="app/service/group.service.js"></script>
+  <script src="app/service/lesson.service.js"></script>
+  <script src="app/service/login.service.js"></script>
+  <script src="app/service/mark.service.js"></script>
+  <script src="app/service/markforlesson.service.js"></script>
+  <script src="app/service/student.service.js"></script>
+  <script src="app/service/student-subject.service.js"></script>
+  <script src="app/service/subject.service.js"></script>
+  <script src="app/service/teacher.service.js"></script>
+  <script src="app/service/teacher-group.service.js"></script>
+  <script src="app/service/teacher-subject.service.js"></script>
+  <script src="app/service/term.service.js"></script>
+
+  <!-- controllers -->
+  <script src="app/controller/course.controller.js"></script>
+  <script src="app/controller/group.controller.js"></script>
+  <script src="app/controller/lesson.controller.js"></script>
+  <script src="app/controller/login.controller.js"></script>
+  <script src="app/controller/mark.controller.js"></script>
+  <script src="app/controller/markforlesson.controller.js"></script>
+  <script src="app/controller/student.controller.js"></script>
+  <script src="app/controller/student-subject.controller.js"></script>
+  <script src="app/controller/subject.controller.js"></script>
+  <script src="app/controller/teacher.controller.js"></script>
+  <script src="app/controller/teacher-group.controller.js"></script>
+  <script src="app/controller/teacher-subject.controller.js"></script>
+  <script src="app/controller/term.controller.js"></script>
+
+
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+              <a>School_Application</a>
+              <div >
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item list-group-item-primary">
+                    <a ui-sref="login">Login</a>
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    <a ui-sref="mark">Marks</a>
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    <a ui-sref="student">Students</a>
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    <a ui-sref="teacher">Teachers</a>
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    <a ui-sref="subject">Subjects</a>
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    <a ui-sref="term">Terms</a>
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    <a ui-sref="course">Courses</a>
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    <a ui-sref="group">Groups</a>
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    <a ui-sref="lesson">Lessons</a>
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    <a ui-sref="markForLesson">List of Marks</a>
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    <a ui-sref="teacherGroup">Teachers in Groups</a>
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    <a ui-sref="teacherSubject">Teachers in Subjects</a>
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    <a ui-sref="studentSubject">Students in Subjects</a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+            <td>
+                <ui-view></ui-view>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

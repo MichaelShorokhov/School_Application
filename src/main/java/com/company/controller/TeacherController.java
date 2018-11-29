@@ -41,7 +41,7 @@ public class TeacherController {
         return teacherService.findTeacherById(teacher.getId()).getSubjects();
     }
 
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/add")
     @ResponseBody public Teacher addTeacher(@Valid @RequestBody Teacher teacher){
         teacherService.addTeacher(teacher);
         return teacher;
@@ -76,7 +76,8 @@ public class TeacherController {
     @PostMapping(value = "/addSubject/{id}")
     public Subject addSubjectToTeacher(@PathVariable String id,@RequestBody Subject subject){
         Subject newSubject = subjectService.findSubjectById(subject.getId());
-        teacherService.addSubjectToTeacher(teacherService.findTeacherById(Long.parseLong(id)), newSubject);
+        teacherService.addSubjectToTeacher(teacherService.findTeacherById(Long.parseLong(id)),
+                newSubject);
         return newSubject;
     }
 

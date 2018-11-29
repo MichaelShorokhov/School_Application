@@ -18,13 +18,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Scope(value = "prototype")
 public class TeacherService {
 
     @Autowired
     private TeacherRepository repository;
-    @PersistenceContext
-    EntityManager em;
 
     public List<Teacher> findAll(){
         List<Teacher> teachers = (ArrayList<Teacher>)repository.findAll();
@@ -74,32 +71,4 @@ public class TeacherService {
         teacher.removeSubject(subject);
         repository.save(teacher);
     }
-    public Teacher findTeacherByName(String name){
-        Query query = em.createNativeQuery("select * from teacher WHERE name=:name", Teacher.class)
-                .setParameter("name", name);
-        System.out.println(query.getResultList().isEmpty());
-        Teacher teacher = (Teacher)query.getResultList().get(0);
-        return teacher;
-    }
-    @Transactional
-    public List<Teacher> findTeacher(Teacher teacher){
-        Query query = em.createNativeQuery(
-                "select * from teacher "
-                + "where ((name=:name) or not :byname) "
-                + "and ((surname=:surname) or not :bysurname) "
-                + "and ((age=:age) or not :byage) "
-                + "and ((phone_number=:phonenumber) or not :byphonenumber) ", Teacher.class)
-                .setParameter("name", teacher.getName())
-                .setParameter("byname", !teacher.getName().isEmpty())
-                .setParameter("surname", teacher.getSurname())
-                .setParameter("bysurname", !teacher.getSurname().isEmpty())
-                .setParameter("age", teacher.getAge())
-                .setParameter("byage", teacher.getAge()!=0)
-                .setParameter("phonenumber", teacher.getPhoneNumber())
-                .setParameter("byphonenumber", !teacher.getPhoneNumber().isEmpty());
-        List<Teacher> teachers = query.getResultList();
-        return teachers;
-    }
-
-
 }

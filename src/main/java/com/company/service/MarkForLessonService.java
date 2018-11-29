@@ -1,16 +1,9 @@
 package com.company.service;
 
-import com.company.entities.Lesson;
-import com.company.entities.Mark;
 import com.company.entities.MarkForLesson;
-import com.company.entities.Student;
 import com.company.repository.MarkForLessonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

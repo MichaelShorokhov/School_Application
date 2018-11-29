@@ -30,8 +30,9 @@ public class Student {
     @JoinColumn(name="group_id")
     private StudyGroup group;
 
-    @OneToMany(mappedBy = "student", orphanRemoval = true)
+    @OneToMany(mappedBy = "student")
     @JsonIgnore
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<MarkForLesson> marksForLessons = new ArrayList<>();
 
     @ManyToMany(mappedBy = "students",  cascade = {CascadeType.PERSIST, CascadeType.MERGE})

@@ -2,6 +2,7 @@ package com.company.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Check;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Check(constraints = "startdate < enddate")
 public class Term {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "term_seq")

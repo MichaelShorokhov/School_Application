@@ -1,5 +1,8 @@
 package com.company.entities;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -24,6 +27,7 @@ public class MarkForLesson {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Student student;
 

@@ -23,19 +23,18 @@ public class MarkForLessonController {
     public List<MarkForLesson> findAllMarkForLessons(){
         return markForLessonService.findAll();
     }
-    @Transactional
+
     @PostMapping(value = "/add")
     public MarkForLesson addMarkForLesson(@Valid @RequestBody MarkForLesson markForLesson){
         markForLessonService.addMarkForLesson(markForLesson);
         return markForLesson;
-
     }
 
     @DeleteMapping(value = "/remove/{id}")
     public void removeMarkForLesson(@PathVariable String id){
         markForLessonService.removeMarkForLesson(Long.parseLong(id));
     }
-    @Transactional
+
     @PostMapping(value = "/update")
     public MarkForLesson updateStudent(@Valid @RequestBody MarkForLesson markForLesson){
         markForLessonService.updateMarkForLesson(markForLesson);

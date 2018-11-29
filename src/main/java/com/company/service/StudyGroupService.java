@@ -2,7 +2,6 @@ package com.company.service;
 
 import com.company.entities.StudyGroup;
 import com.company.repository.LessonRepository;
-import com.company.repository.StudentRepository;
 import com.company.repository.StudyGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
