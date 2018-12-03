@@ -1,0 +1,64 @@
+<div>
+<div class="subtitle">Lesson</div>
+<table>
+    <tr>
+    <td class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Subject</th>
+                    <th>Term</th>
+                    <th>Teacher</th>
+                    <th>Group</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="lesson in lessonCtrl.lessons">
+                    <td>{{lesson.id}}</td>
+                    <td><input type="date" ng-model="lesson.date" class="date"></td>
+                    <td><select class="selct" ng-options="subject.name for subject in lessonCtrl.subjects track by subject.id"
+                                ng-model="lesson.subject">
+                        </select></td>
+                    <td><select class="selct" ng-options="term.name for term in lessonCtrl.terms track by term.id"
+                                ng-model="lesson.term">
+                        </select></td>
+                    <td><select class="selct" ng-options="(teacher.name + ' ' +  teacher.surname) for teacher in lessonCtrl.teachers track by teacher.id"
+                                ng-model="lesson.teacher">
+                        </select></td>
+                    <td><select class="selct" ng-options="group.name for group in lessonCtrl.groups track by group.id"
+                                ng-model="lesson.group">
+                        </select></td>
+                    <td><input type="button" value="Update" ng-click="lessonCtrl.updateLesson(lesson)"></td>
+                    <td><input type="button" value="Delete" ng-click="lessonCtrl.deleteLesson(lesson)"></td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+    <td>
+        <div class="inputPanel">
+            <p><label>Input Lesson Date </label>
+            <input type="date" ng-model="lessonCtrl.newLesson.date" class="date"></p>
+            <p><label>Select Subject</label>
+                <select class="selct" ng-options="subject.name for subject in lessonCtrl.subjects track by subject.id"
+                        ng-model="lessonCtrl.newLesson.subject">
+                </select></p>
+            <p><label>Select Term</label>
+                <select class="selct" ng-options="term.name for term in lessonCtrl.terms track by term.id"
+                        ng-model="lessonCtrl.newLesson.term">
+                </select></p>
+            <p><label>Select Teacher</label>
+                <select class="selct" ng-options="(teacher.name + ' ' +  teacher.surname) for teacher in lessonCtrl.teachers track by teacher.id"
+                        ng-model="lessonCtrl.newLesson.teacher">
+                </select></p>
+            <p><label>Select Group</label>
+                <select class="selct" ng-options="group.name for group in lessonCtrl.groups track by group.id"
+                        ng-model="lessonCtrl.newLesson.group">
+                </select></p>
+            <p><input type="button" value="Add" ng-click="lessonCtrl.addLesson(lessonCtrl.newLesson)"></p>
+        </div>
+    </td>
+    </tr>
+</table>
+</div>

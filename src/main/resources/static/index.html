@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>SchoolApp</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.20/angular-ui-router.js"></script>
@@ -58,11 +61,12 @@
 
 
 </head>
-<body>
-    <table>
-        <tr>
-            <td>
-              <a>School_Application</a>
+<body style="background-color: lightgoldenrodyellow">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-auto">
+              <a class="title" ui-sref="login">
+              <img src="app/img/titleIcon.ico" style="height: 40px; width: 50px">School_Application</a>
               <div >
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item list-group-item-primary">
@@ -106,11 +110,21 @@
                   </li>
                 </ul>
               </div>
-            </td>
-            <td>
+            </div>
+            <div class="col">
                 <ui-view></ui-view>
-            </td>
-        </tr>
-    </table>
+            </div>
+            <div class="col-md-auto">
+              <div class="btn-group btn-group-toggle" data-toggle="button">
+                <label class="btn btn-outline-primary" >
+                    <input type="radio" (click)="useLanguage('en')">en
+                </label>
+                <label class="btn btn-outline-primary">
+                    <input type="radio" (click)="useLanguage('ru')">ru
+                </label>
+              </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

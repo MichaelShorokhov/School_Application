@@ -1,0 +1,57 @@
+<div>
+<div class="subtitle">MarkForLesson</div>
+<table>
+    <tr>
+    <td class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Mark</th>
+                    <th>Lesson</th>
+                    <th>Student</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="markForLesson in markForLessonCtrl.markForLessons">
+                    <td>{{markForLesson.id}}</td>
+                    <td><select class="selct" ng-options="mark.value for mark in markForLessonCtrl.marks track by mark.id"
+                                ng-model="markForLesson.mark">
+                        </select></td>
+                    <td><select class="selct"
+                    ng-options="(lesson.subject.name + ' ' + lesson.teacher.name + ' ' + lesson.teacher.surname + ' ' + lesson.date)
+                    for lesson in markForLessonCtrl.lessons track by lesson.id"
+                                ng-model="markForLesson.lesson">
+                        </select></td>
+                    <td><select class="selct"
+                    ng-options="(student.name + ' ' +  student.surname) for student in markForLessonCtrl.students track by student.id"
+                                ng-model="markForLesson.student">
+                        </select></td>
+                    <td><input type="button" value="Update" ng-click="markForLessonCtrl.updateMarkForLesson(markForLesson)"></td>
+                    <td><input type="button" value="Delete" ng-click="markForLessonCtrl.deleteMarkForLesson(markForLesson)"></td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+    <td>
+        <div class="inputPanel">
+            <p><label>Select Mark</label>
+                <select class="selct" ng-options="mark.value for mark in markForLessonCtrl.marks track by mark.id"
+                        ng-model="markForLessonCtrl.newMarkForLesson.mark">
+                </select></p>
+            <p><label>Select Lesson</label>
+                <select class="selct"
+                ng-options="(lesson.subject.name + ' ' + lesson.teacher.name + ' ' + lesson.teacher.surname + ' ' + lesson.date)
+                             for lesson in markForLessonCtrl.lessons track by lesson.id"
+                        ng-model="markForLessonCtrl.newMarkForLesson.lesson">
+                </select></p>
+            <p><label>Select Student</label>
+                <select class="selct" ng-options="(student.surname + ' ' +  student.name) for student in markForLessonCtrl.students track by student.id"
+                        ng-model="markForLessonCtrl.newMarkForLesson.student">
+                </select></p>
+            <p><input type="button" value="Add" ng-click="markForLessonCtrl.addMarkForLesson(markForLessonCtrl.newMarkForLesson)"></p>
+        </div>
+    </td>
+    </tr>
+</table>
+</div>

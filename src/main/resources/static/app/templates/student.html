@@ -1,0 +1,52 @@
+<div>
+<div class="subtitle">Student</div>
+<table>
+    <tr>
+    <td class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Age</th>
+                    <th>Phone Number</th>
+                    <th>Group</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="student in studentCtrl.students">
+                    <td>{{student.id}}</td>
+                    <td><input type="text" ng-model="student.name"  class="text"></td>
+                    <td><input type="text" ng-model="student.surname"  class="text"></td>
+                    <td><input type="number" ng-model="student.age"  class="text"></td>
+                    <td><input type="text" ng-model="student.phoneNumber"  class="text"></td>
+                    <td><select class="selct" ng-options="group.name for group in studentCtrl.groups track by group.id"
+                                ng-model="student.group">
+                        </select></td>
+                    <td><input type="button" value="Update" ng-click="studentCtrl.updateStudent(student)"></td>
+                    <td><input type="button" value="Delete" ng-click="studentCtrl.deleteStudent(student)"></td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+    <td>
+        <div class="inputPanel">
+            <p><label>Input Student Name </label>
+            <input type="text" ng-model="studentCtrl.newStudent.name" class="text"></p>
+            <p><label>Input Student Surname </label>
+            <input type="text" ng-model="studentCtrl.newStudent.surname" class="text"></p>
+            <p><label>Input Student Age </label>
+            <input type="number" ng-model="studentCtrl.newStudent.age" class="text"></p>
+            <p><label>Input Student Phone Number </label>
+            <input type="text" ng-model="studentCtrl.newStudent.phoneNumber" class="text"></p>
+            <p><label>Select Group</label>
+                <select class="selct" ng-options="group.name for group in studentCtrl.groups track by group.id"
+                        ng-model="studentCtrl.newStudent.group">
+                </select></p>
+            <p><input type="button" value="Add" ng-click="studentCtrl.addStudent(studentCtrl.newStudent)"></p>
+        </div>
+    </td>
+    </tr>
+</table>
+</div>

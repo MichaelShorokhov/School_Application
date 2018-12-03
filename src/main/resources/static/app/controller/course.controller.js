@@ -2,7 +2,7 @@ angular
     .module("SchoolApp")
     .controller("CourseController", ["CourseService", function (CourseService) {
         var courseCtrl = this;
-        var course;
+        courseCtrl.newCourse = {};
 
         init();
 
@@ -20,8 +20,8 @@ angular
             CourseService.addCourse(course).then(
                 function (response) {
                     course.id = response.data.id;
-                    courseCtrl.push(course);
-                    course = {};
+                    courseCtrl.courses.push(course);
+                    courseCtrl.newCourse = {}
                 }
             )
         };
@@ -33,8 +33,9 @@ angular
         courseCtrl.deleteCourse = function deleteCourse(course) {
             CourseService.deleteCourse(course).then(
                 function () {
-                    courseCtrl.courses.splice(courseCtrl.courses.indexOf(course), 1) }
-
+                    courseCtrl.courses.splice(courseCtrl.courses.indexOf(course), 1)
+                }
             )
         };
+
     }]);

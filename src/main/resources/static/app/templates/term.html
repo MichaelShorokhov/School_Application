@@ -1,0 +1,42 @@
+<div>
+<div class="subtitle">Term</div>
+<table>
+    <tr>
+    <td class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Is Closed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="term in termCtrl.terms">
+                    <td>{{term.id}}</td>
+                    <td><input type="text" ng-model="term.name"  class="text"></td>
+                    <td><input type="date" ng-model="term.startDate"  class="date"></td>
+                    <td><input type="date" ng-model="term.endDate"  class="date"></td>
+                    <td><input type="checkbox" ng-model="term.closed"  class="text"></td>
+                    <td><input type="button" value="Update" ng-click="termCtrl.updateTerm(term)"></td>
+                    <td><input type="button" value="Delete" ng-click="termCtrl.deleteTerm(term)"></td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+    <td>
+        <div class="inputPanel">
+            <p><label>Input Term Name </label>
+            <input type="text" ng-model="termCtrl.newTerm.name" class="date"></p>
+            <p><label>Input Term Start Date </label>
+            <input type="date" ng-model="termCtrl.newTerm.startDate" class="date"></p>
+            <p><label>Input Term End Date </label>
+            <input type="date" ng-model="termCtrl.newTerm.endDate" class="text"></p>
+            <p><input type="button" value="Add" ng-click="termCtrl.addTerm(termCtrl.newTerm)"></p>
+        </div>
+    </td>
+    </tr>
+</table>
+</div>

@@ -39,10 +39,9 @@ public class TermService {
     }
 
     public void closeTerm(Term term){
-        Term newTerm = findTermById(term.getId());
-        if (!newTerm.isClosed()){
-            newTerm.setClosed(true);
-            repository.save(newTerm);
+        if (!term.isClosed()){
+            term.setClosed(true);
+            repository.save(term);
         }
     }
 

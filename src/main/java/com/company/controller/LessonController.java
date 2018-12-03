@@ -30,8 +30,9 @@ public class LessonController {
     public void removeLesson(@PathVariable String id){
         lessonService.removeLesson(Long.parseLong(id));
     }
+
     @PostMapping(value = "/update")
-    public Lesson updateStudent(@Valid @RequestBody Lesson lesson){
+    public Lesson updateLesson(@Valid @RequestBody Lesson lesson){
         lessonService.updateLesson(lesson);
         return lesson;
     }

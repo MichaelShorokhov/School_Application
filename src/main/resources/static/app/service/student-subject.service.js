@@ -1,17 +1,22 @@
 angular
     .module("SchoolApp")
     .factory("StudentSubjectService", ["$http", function ($http) {
-        var BASE_URL = "http://localhost:8080/studentSubject";
-        var ALL_STUDENT_SUBJECTS = "http://localhost:8080/studentSubject/findAll";
-        var ADD_STUDENT_SUBJECT = "${this.BASE_URL}/add";
-        var UPDATE_STUDENT_SUBJECT = "${this.BASE_URL}/update";
-        var DELETE_STUDENT_SUBJECT = "${this.BASE_URL}/remove/";
+        var FIND_SUBJECTS = "http://localhost:8080/student/findSubjects";
+        var ADD_SUBJECT = "http://localhost:8080/student/addSubject/";
+        var REMOVE_SUBJECT = "http://localhost:8080/student/removeSubject/";
 
         var service = {};
 
+        service.findSubjects = function findSubjects(student) {
+            return $http.post(FIND_SUBJECTS, student)
+        };
 
-        service.getAllStudentSubjects = function getAllStudentSubjects() {
-            return $http.get(ALL_STUDENT_SUBJECTS);
+        service.addSubject = function addSubject(student, subject) {
+            return $http.post(ADD_SUBJECT + student.id, subject)
+        };
+
+        service.removeSubject = function removeSubject(student, subject) {
+            return $http.post(REMOVE_SUBJECT + student.id, subject)
         };
 
         return service;

@@ -1,17 +1,22 @@
 angular
     .module("SchoolApp")
     .factory("TeacherGroupService", ["$http", function ($http) {
-        var BASE_URL = "http://localhost:8080/teacherGroup";
-        var ALL_TEACHER_GROUPS = "http://localhost:8080/teacherGroup/findAll";
-        var ADD_TEACHER_GROUP = "${this.BASE_URL}/add";
-        var UPDATE_TEACHER_GROUP = "${this.BASE_URL}/update";
-        var DELETE_TEACHER_GROUP = "${this.BASE_URL}/remove/";
+        var FIND_GROUPS = "http://localhost:8080/teacher/findGroups";
+        var ADD_GROUP = "http://localhost:8080/teacher/addGroup/";
+        var REMOVE_GROUP = "http://localhost:8080/teacher/removeGroup/";
 
         var service = {};
 
+        service.findGroups = function findGroups(teacher) {
+            return $http.post(FIND_GROUPS, teacher)
+        };
 
-        service.getAllTeacherGroups = function getAllTeacherGroups() {
-            return $http.get(ALL_TEACHER_GROUPS);
+        service.addGroup = function addGroup(teacher, group) {
+            return $http.post(ADD_GROUP + teacher.id, group)
+        };
+
+        service.removeGroup = function removeGroup(teacher, group) {
+            return $http.post(REMOVE_GROUP + teacher.id, group)
         };
 
         return service;

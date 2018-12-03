@@ -1,19 +1,32 @@
 <div>
-<div>Course</div>
+<div class="subtitle">Course</div>
 <table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Year</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="course in courseCtrl.courses">
-            <td>{{course.id}}</td>
-            <td><input type="text" ng-model="course.year"></td>
-            <td><input type="button" value="Update" ng-click="courseCtrl.updateCourse(course)"></td>
-            <td><input type="button" value="Delete" ng-click="courseCtrl.deleteCourse(course)"></td>
-        </tr>
-    </tbody>
+    <tr>
+    <td class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="course in courseCtrl.courses">
+                    <td>{{course.id}}</td>
+                    <td><input type="text" ng-model="course.year" class="text"></td>
+                    <td><input type="button" value="Update" ng-click="courseCtrl.updateCourse(course)"></td>
+                    <td><input type="button" value="Delete" ng-click="courseCtrl.deleteCourse(course)"></td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+    <td>
+        <div class="inputPanel">
+            <p><label>Input Course Year </label>
+            <input type="text" ng-model="courseCtrl.newCourse.year" class="text"></p>
+            <p><input type="button" value="Add" ng-click="courseCtrl.addCourse(courseCtrl.newCourse)"></p>
+        </div>
+    </td>
+    </tr>
 </table>
 </div>

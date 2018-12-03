@@ -1,0 +1,44 @@
+<div>
+<div class="subtitle">Teacher</div>
+<table>
+    <tr>
+    <td class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Age</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="teacher in teacherCtrl.teachers">
+                    <td>{{teacher.id}}</td>
+                    <td><input type="text" ng-model="teacher.name"  class="text"></td>
+                    <td><input type="text" ng-model="teacher.surname"  class="text"></td>
+                    <td><input type="number" ng-model="teacher.age"  class="text"></td>
+                    <td><input type="text" ng-model="teacher.phoneNumber"  class="text"></td>
+                    <td><input type="button" value="Update" ng-click="teacherCtrl.updateTeacher(teacher)"></td>
+                    <td><input type="button" value="Delete" ng-click="teacherCtrl.deleteTeacher(teacher)"></td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+    <td>
+        <div class="inputPanel">
+            <p><label>Input Teacher Name </label>
+            <input type="text" ng-model="teacherCtrl.newTeacher.name" class="text"></p>
+            <p><label>Input Teacher Surname </label>
+            <input type="text" ng-model="teacherCtrl.newTeacher.surname" class="text"></p>
+            <p><label>Input Teacher Age </label>
+            <input type="number" ng-model="teacherCtrl.newTeacher.age" class="text"></p>
+            <p><label>Input Teacher Phone Number </label>
+            <input type="text" ng-model="teacherCtrl.newTeacher.phoneNumber" class="text"></p>
+            <p><input type="button" value="Add" ng-click="teacherCtrl.addTeacher(teacherCtrl.newTeacher)"></p>
+        </div>
+    </td>
+    </tr>
+</table>
+</div>

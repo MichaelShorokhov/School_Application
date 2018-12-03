@@ -1,0 +1,40 @@
+<div>
+<div class="subtitle">Group</div>
+<table>
+    <tr>
+    <td class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Course</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="group in groupCtrl.groups">
+                    <td>{{group.id}}</td>
+                    <td><input type="text" ng-model="group.name" class="text"></td>
+                    <td><select class="selct" ng-options="course.year for course in groupCtrl.courses track by course.id"
+                                ng-model="group.course">
+                        </select></td>
+                    <td><input type="button" value="Update" ng-click="groupCtrl.updateGroup(group)"></td>
+                    <td><input type="button" value="Delete" ng-click="groupCtrl.deleteGroup(group)"></td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+    <td>
+        <div class="inputPanel">
+            <p><label>Input Group Name </label>
+            <input type="text" ng-model="groupCtrl.newGroup.name" class="text"></p>
+            <p><label>Select Course</label>
+                <select class="selct" ng-options="course.year for course in groupCtrl.courses track by course.id"
+                        ng-model="groupCtrl.newGroup.course">
+                </select></p>
+            <p><input type="button" value="Add" ng-click="groupCtrl.addGroup(groupCtrl.newGroup)"></p>
+        </div>
+    </td>
+    </tr>
+</table>
+</div>

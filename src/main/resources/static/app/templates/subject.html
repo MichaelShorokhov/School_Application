@@ -1,0 +1,32 @@
+<div>
+<div class="subtitle">Subject</div>
+<table>
+    <tr>
+    <td class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="subject in subjectCtrl.subjects">
+                    <td>{{subject.id}}</td>
+                    <td><input type="text" ng-model="subject.name"  class="text"></td>
+                    <td><input type="button" value="Update" ng-click="subjectCtrl.updateSubject(subject)"></td>
+                    <td><input type="button" value="Delete" ng-click="subjectCtrl.deleteSubject(subject)"></td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+    <td>
+        <div class="inputPanel">
+            <p><label>Input Subject Name </label>
+            <input type="text" ng-model="subjectCtrl.newSubject.name" class="text"></p>
+            <p><input type="button" value="Add" ng-click="subjectCtrl.addSubject(subjectCtrl.newSubject)"></p>
+        </div>
+    </td>
+    </tr>
+</table>
+</div>

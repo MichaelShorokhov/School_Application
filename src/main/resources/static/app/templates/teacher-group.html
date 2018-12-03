@@ -1,0 +1,30 @@
+<div class="row" style="margin-top: 28px;">
+        <table>
+        <tr>
+        <td>
+      <label>Select Teacher </label>
+      <select class="selct" ng-options="(teacher.name + ' ' + teacher.surname) for teacher in teacherGroupCtrl.teachers track by teacher.id"
+              ng-model="teacherGroupCtrl.selectedTeacher" ng-change="teacherGroupCtrl.getGroupsByTeacher(teacherGroupCtrl.selectedTeacher)">
+      </select>
+    <table ng-if="teacherGroupCtrl.groupsByTeacher.length!=0 && teacherGroupCtrl.groupsByTeacher!=undefined" class="table">
+      <tr>
+        <th>Name</th>
+      </tr>
+      <tr ng-repeat="group in teacherGroupCtrl.groupsByTeacher" >
+        <td>{{group.name}}</td>
+        <td><button ng-click="teacherGroupCtrl.removeGroup(group)">Delete Group</button></td>
+      </tr>
+    </table>
+    </td>
+    <td class="input">
+    <div ng-if="teacherGroupCtrl.selectedTeacher.id!=null" class="inputPanel">
+        <p><label>Select Group </label>
+                     <select class="selct" ng-options="group.name for group in teacherGroupCtrl.groups track by group.id"
+                           ng-model="teacherGroupCtrl.selectedGroup">
+                   </select>
+        <p><button ng-click="teacherGroupCtrl.addGroup()">Add Group</button></p>
+    </div>
+    </td>
+    </tr>
+    </table>
+ </div>

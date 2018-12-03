@@ -1,0 +1,30 @@
+<div class="row" style="margin-top: 28px;">
+        <table>
+        <tr>
+        <td>
+      <label>Select Student </label>
+      <select class="selct" ng-options="(student.name + ' ' + student.surname) for student in studentSubjectCtrl.students track by student.id"
+              ng-model="studentSubjectCtrl.selectedStudent" ng-change="studentSubjectCtrl.getSubjectsByStudent(studentSubjectCtrl.selectedStudent)">
+      </select>
+    <table ng-if="studentSubjectCtrl.subjectsByStudent != undefined && studentSubjectCtrl.subjectsByStudent.length!=0" class="table">
+      <tr>
+        <th>Name</th>
+      </tr>
+      <tr ng-repeat="subject in studentSubjectCtrl.subjectsByStudent" >
+        <td>{{subject.name}}</td>
+        <td><button ng-click="studentSubjectCtrl.removeSubject(subject)">Delete Subject</button></td>
+      </tr>
+    </table>
+    </td>
+    <td class="input">
+    <div ng-if="studentSubjectCtrl.selectedStudent.id!=null" class="inputPanel">
+        <p><label>Select Subject </label>
+                     <select class="selct" ng-options="subject.name for subject in studentSubjectCtrl.subjects track by subject.id"
+                           ng-model="studentSubjectCtrl.selectedSubject">
+                   </select>
+        <p><button ng-click="studentSubjectCtrl.addSubject()">Add Subject</button></p>
+    </div>
+    </td>
+    </tr>
+    </table>
+ </div>
